@@ -1,0 +1,14 @@
+
+<section class="py-10 w-[800px] mx-auto">
+  
+  <h1 class="text-3xl font-medium mb-10">Create new blog</h1>
+
+  <%= render partial: "form", locals: {
+    form_url: blogs_path,
+    form_method: :post,
+    submit_text: "Create Blog",
+    show_current_image: false
+  } %>
+  
+</section>
+

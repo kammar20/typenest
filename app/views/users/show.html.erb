@@ -1,0 +1,60 @@
+<h1 class="text-4xl py-10">Welcome <%= @user.username%> </h1>
+<section class="w-full relative flex justify-between items-start">
+    <!-- user profile -->
+    <div class="user-details w-[25%] bg-neutral-100 sticky top-20 p-4">
+        <!-- user avatar -->
+        <div class="w-32 h-32 mb-10 mx-auto flex items-center justify-center rounded-full bg-blue-600 text-white text-2xl font-semibold shadow">
+            <%= @user.avatar_letter %>
+        </div>
+
+          <h2 class="text-xl font-medium text-gray-900"> <%= @user.username.capitalize %> </h2>
+          <h5 class="text-sm text-gray-600 mb-5"> <%= @user.usertitle %> </h5>
+          <p class="text-gray-600 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eius quo at quae.</p>
+          <p class="text-gray-600 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eius quo at quae.</p>
+
+          <% if logged_in? && current_user == @user %>
+          <div class="btn-group flex flex-wrap gap-2">
+                <%= link_to "Create blog", new_blog_path , class: 'inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-900'  %>
+
+                <%= link_to "Edit profile", edit_user_path(@user), class: 'inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-900' %>
+
+                <%= link_to "Delete Account", user_path(@user), class: 'inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-900', method: :delete, data: {confirm: "Are you sure?"} %>
+          </div>
+          <% end %>
+    </div>
+
+    <!-- user blog -->
+    <div class="user-all-blogs w-[70%] flex flex-col gap-10">
+        <% @blogs.each do |blog| %>
+            <div class="flex justify-between bg-neutral-100">
+                <!-- blog image -->
+                 <div>
+                    <%= image_tag blog.image %>
+                 </div>
+
+                <!-- blog content -->
+                 <div class="p-2">
+                    <%= link_to blog.title, blog_path(blog), class: "block text-xl font-medium text-gray-900"  %>
+                    <%= link_to blog.description, blog_path(blog), class: "text-sm text-gray-600 mb-5"  %>
+
+                    <% if logged_in? && current_user == blog.user %>
+                    <div class="btn-group flex gap-3 pt-3">
+                          <%= link_to "Edit blog", edit_blog_path(blog), class: "text-md text-green-700 hover:text-green-900" %>
+                          <%= link_to "Delete blog", blog_path(blog), class: "text-md text-red-700 hover:text-red-900", method: :delete, data: {confirm: "Are you sure?"} %>
+                    </div>
+                    <% end %>
+                 </div>
+            </div>
+        <% end %>
+    </div>
+</section>
+
+
+
+
+
+
+<div class="flickr_pagination py-14">
+    <%= will_paginate @blogs, :container => false %>
+</div>
+

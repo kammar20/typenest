@@ -1,0 +1,30 @@
+<section class="py-20">
+    <div class="img-container mb-8">
+        <%= image_tag @blog.image.url if @blog.image? %>
+    </div>
+    <div class="content-container">
+        <h1 class="text-3xl font-medium mb-3 text-gray-900"><%= @blog.title %></h1>
+        <p class="text-lg text-gray-600 mb-5 w-[60%]"><%= @blog.description %></p>
+        <% if logged_in? && @blog.user == current_user  %>
+        <div class="btn-group flex gap-3 mb-8">
+            <%= link_to "Edit blog", edit_blog_path(@blog), class: "text-md text-green-700 hover:text-green-900" %>
+            <%= link_to "Delete blog", blog_path(@blog), class: "text-md text-red-700 hover:text-red-900", method: :delete, data: {confirm: "Are you sure?"} %>
+        </div>
+         <% end %>
+
+         <div class="flex  items-center gap-5" >
+             <div class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white text-lg font-semibold shadow">
+                 <%= @blog.user.avatar_letter %>
+             </div>
+             <div>
+                 <p><%= link_to @blog.user.username, user_path(@blog.user) %> </p>
+                 <p><%= @blog.user.usertitle%></p>
+            </div>
+         </div>
+    </div>
+</section>
+
+
+
+
+

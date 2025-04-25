@@ -1,0 +1,10 @@
+
+<section class="py-10 w-[500px] mx-auto">
+  
+  <h1 class="text-3xl font-medium mb-10">Signup</h1>
+<%= render partial: "form", locals: {
+    form_url: users_path,
+    form_method: :post,
+    submit_text: "Sign up"
+  } %>
+  </section>

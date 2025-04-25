@@ -1,0 +1,31 @@
+<section class="py-10 w-[500px] mx-auto">
+  
+  <h1 class="text-3xl font-medium mb-10">Login</h1>
+
+
+<%= form_tag login_path, scope: :session, method: :post, multipart: true do %>
+  <div class="mb-7">
+    <%= label_tag :email, "Email", class: "block mb-2 text-sm font-medium text-gray-900" %>
+    <%= email_field_tag :email, nil, class: "w-full border border-gray-600 text-gray-900 text-sm rounded-lg p-2.5" %>
+  </div>
+
+  <div class="mb-7">
+    <%= label_tag :password, "Password", class: "block mb-2 text-sm font-medium text-gray-900" %>
+    <%= password_field_tag :password, nil, class: "w-full border border-gray-600 text-gray-900 text-sm rounded-lg p-2.5" %>
+  </div>
+
+  <div class="mt-6 flex items-center justify-end gap-x-6">
+    <%= link_to "Cancel", blogs_path, class: "text-sm/6 font-semibold text-gray-900" %>
+    <%= submit_tag "Login", class: "rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500" %>
+  </div>
+<% end %>
+
+<p class="text-sm text-gray-600 mt-4">
+  Don’t have an account?
+  <%= link_to " Sign up here", signup_path, class: "text-blue-600 hover:underline font-medium" %>
+</p>
+
+
+</section>
+
+

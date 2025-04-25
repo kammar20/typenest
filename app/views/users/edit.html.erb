@@ -1,0 +1,11 @@
+<section class="py-10 w-[500px] mx-auto">
+  
+  <h1 class="text-3xl font-medium mb-10">Edit your profile</h1>
+
+<%= render partial: "form", locals: {
+    form_url: user_path(@user),
+    form_method: :patch,
+    submit_text: "Update User"
+  } %>
+
+</section>

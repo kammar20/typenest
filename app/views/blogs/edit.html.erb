@@ -1,0 +1,11 @@
+<section class="py-10 w-[800px] mx-auto">
+  
+  <h1 class="text-3xl font-medium mb-10">Update blog</h1>
+    <%= render partial: "form", locals: {
+        form_url: blog_path(@blog),
+        form_method: :patch,
+        submit_text: "Update Blog",
+        show_current_image: true
+      } %>
+
+</section>
