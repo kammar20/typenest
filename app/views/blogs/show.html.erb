@@ -26,9 +26,6 @@
             <%= button_to 'Like', blog_like_path(@blog), method: :post, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
           <% end %>
         <% else %>
-          <% session[:forwarding_url] = request.original_url %>
-          <% session[:intended_action] = 'like' %>
-          <% session[:blog_id] = @blog.id %>
           <%= link_to 'Like', login_path, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600", data: { turbo: false } %>
         <% end %>
       </div>
@@ -46,11 +43,9 @@
               <%= comment.created_at.strftime("%B %d, %Y") %>
             </span>
             
-            <% if logged_in? && comment.user == current_user %>
-            <div>
+            <% if can?(:manage, comment) %>
               <%= link_to 'Edit', edit_blog_comment_path(@blog, comment), class: "text-green-500" %> | 
               <%= link_to 'Delete', blog_comment_path(@blog, comment), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-500" %>
-            </div>
             <% end %>
           </div>
         <% end %>

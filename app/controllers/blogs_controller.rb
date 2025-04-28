@@ -26,6 +26,14 @@ class BlogsController < ApplicationController
 
   def show
     @likes = @blog.likes
+
+    authorize! :read, @blog
+
+    unless logged_in?
+      session[:forwarding_url] = request.original_url
+      session[:intended_action] = 'like'
+      session[:blog_id] = @blog.id
+    end
   end
   
   def edit

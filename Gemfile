@@ -33,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'carrierwave', '~> 1.3'
 gem 'mini_magick'
+gem 'cancancan', '~> 3.0'
 
 gem 'will_paginate', '~> 4.0'
 
