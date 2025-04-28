@@ -3,7 +3,9 @@ Rails.application.routes.draw do
 
   resources :blogs do
     resource :like, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy, :edit, :update]
   end
+  
 
   get "/signup", to: "users#new"
   resources :users, except: [:new]

@@ -35,6 +35,38 @@
 
       <!-- comment section -->
       <!-- comment section -->
+      <div class="comment-section mt-8 mb-10">
+        <h2 class="text-xl font-semibold mb-4">Comments</h2>
+        
+        <% @blog.comments.each do |comment| %>
+          <div class="comment mb-4">
+            <p class="font-semibold "><%= comment.user.username %></p>
+            <p><%= comment.body %></p>
+            <span class="text-sm text-gray-500">
+              <%= comment.created_at.strftime("%B %d, %Y") %>
+            </span>
+            
+            <% if logged_in? && comment.user == current_user %>
+            <div>
+              <%= link_to 'Edit', edit_blog_comment_path(@blog, comment), class: "text-green-500" %> | 
+              <%= link_to 'Delete', blog_comment_path(@blog, comment), method: :delete, data: { confirm: "Are you sure?" }, class: "text-red-500" %>
+            </div>
+            <% end %>
+          </div>
+        <% end %>
+
+        <!-- Comment form (only visible for logged-in users) -->
+        <% if logged_in? %>
+          <%= form_for([@blog, @blog.comments.build]) do |f| %>
+            <div class="form-group">
+              <%= f.text_area :body, placeholder: "Write a comment...", class: "w-full p-2 border rounded" %>
+            </div>
+            <%= f.submit "Post Comment", class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+          <% end %>
+        <% else %>
+          <p class="text-red-600">You must be logged in to comment!!</p>
+        <% end %>
+      </div>
   
       <div class="flex items-center gap-5">
         <div class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white text-lg font-semibold shadow">
