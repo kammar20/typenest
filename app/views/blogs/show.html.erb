@@ -1,30 +1,49 @@
 <section class="py-20">
     <div class="img-container mb-8">
-        <%= image_tag @blog.image.url if @blog.image? %>
+      <%= image_tag @blog.image.url if @blog.image? %>
     </div>
+  
     <div class="content-container">
-        <h1 class="text-3xl font-medium mb-3 text-gray-900"><%= @blog.title %></h1>
-        <p class="text-lg text-gray-600 mb-5 w-[60%]"><%= @blog.description %></p>
-        <% if logged_in? && @blog.user == current_user  %>
-        <div class="btn-group flex gap-3 mb-8">
-            <%= link_to "Edit blog", edit_blog_path(@blog), class: "text-md text-green-700 hover:text-green-900" %>
-            <%= link_to "Delete blog", blog_path(@blog), class: "text-md text-red-700 hover:text-red-900", method: :delete, data: {confirm: "Are you sure?"} %>
+      <h1 class="text-3xl font-medium mb-3 text-gray-900"><%= @blog.title %></h1>
+      <p class="text-lg text-gray-600 mb-5 w-[60%]"><%= @blog.description %></p>
+      <% if logged_in? && @blog.user == current_user  %>
+      <div class="btn-group flex gap-3 mb-8">
+        <%= link_to "Edit blog", edit_blog_path(@blog), class: "text-md text-green-700 hover:text-green-900" %>
+        <%= link_to "Delete blog", blog_path(@blog), class: "text-md text-red-700 hover:text-red-900", method: :delete, data: {confirm: "Are you sure?"} %>
+      </div>
+      <% end %>
+  
+      <!-- Like button and count -->
+      <div class="mb-4">
+        <p class="text-gray-700 font-semibold mb-2">
+          Likes: <%= @blog.likes.count %>
+        </p>
+      
+        <% if logged_in? %>
+          <% if @blog.liked_by?(current_user) %>
+            <%= button_to 'Unlike', blog_like_path(@blog), method: :delete, class: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" %>
+          <% else %>
+            <%= button_to 'Like', blog_like_path(@blog), method: :post, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+          <% end %>
+        <% else %>
+          <% session[:forwarding_url] = request.original_url %>
+          <% session[:intended_action] = 'like' %>
+          <% session[:blog_id] = @blog.id %>
+          <%= link_to 'Like', login_path, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600", data: { turbo: false } %>
+        <% end %>
+      </div>
+
+      <!-- comment section -->
+      <!-- comment section -->
+  
+      <div class="flex items-center gap-5">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white text-lg font-semibold shadow">
+          <%= @blog.user.avatar_letter %>
         </div>
-         <% end %>
-
-         <div class="flex  items-center gap-5" >
-             <div class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white text-lg font-semibold shadow">
-                 <%= @blog.user.avatar_letter %>
-             </div>
-             <div>
-                 <p><%= link_to @blog.user.username, user_path(@blog.user) %> </p>
-                 <p><%= @blog.user.usertitle%></p>
-            </div>
-         </div>
+        <div>
+          <p><%= link_to @blog.user.username, user_path(@blog.user) %> </p>
+          <p><%= @blog.user.usertitle%></p>
+        </div>
+      </div>
     </div>
-</section>
-
-
-
-
-
+  </section>

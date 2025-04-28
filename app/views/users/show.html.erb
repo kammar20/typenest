@@ -14,26 +14,28 @@
 
           <% if logged_in? && current_user == @user %>
           <div class="btn-group flex flex-wrap gap-2">
-                <%= link_to "Create blog", new_blog_path , class: 'inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-900'  %>
+                <%= link_to "Create blog", new_blog_path , class: "text-md text-blue-700 hover:text-blue-900"  %>
 
-                <%= link_to "Edit profile", edit_user_path(@user), class: 'inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-900' %>
+                <%= link_to "Edit profile", edit_user_path(@user), class: "text-md text-green-700 hover:text-green-900" %>
 
-                <%= link_to "Delete Account", user_path(@user), class: 'inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-900', method: :delete, data: {confirm: "Are you sure?"} %>
+                <%= link_to "Delete Account", user_path(@user), class: "text-md text-red-700 hover:text-red-900", method: :delete, data: {confirm: "Are you sure?"} %>
           </div>
           <% end %>
     </div>
 
-    <!-- user blog -->
-    <div class="user-all-blogs w-[70%] flex flex-col gap-10">
+
+
+     <!-- user blog -->
+     <div class="user-all-blogs w-[70%] flex flex-col gap-10">
         <% @blogs.each do |blog| %>
             <div class="flex justify-between bg-neutral-100">
                 <!-- blog image -->
-                 <div>
+                 <div class="w-[30%]"> 
                     <%= image_tag blog.image %>
                  </div>
 
                 <!-- blog content -->
-                 <div class="p-2">
+                 <div class="p-2 w-[70%]">
                     <%= link_to blog.title, blog_path(blog), class: "block text-xl font-medium text-gray-900"  %>
                     <%= link_to blog.description, blog_path(blog), class: "text-sm text-gray-600 mb-5"  %>
 
@@ -47,6 +49,11 @@
             </div>
         <% end %>
     </div>
+      
+  
+  
+  
+  
 </section>
 
 

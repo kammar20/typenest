@@ -1,72 +1,77 @@
-<section class="py-16 sm:py-24 ">
-
-      <!-- top heading -->
-      <div class="flex justify-between items-start">
-        <div>
-          <h2 class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl">From the blog</h2>
-          <p class="mt-2 text-lg/8 text-gray-600">Insights and advice to help you grow in every area of life.</p>
-        </div>
-
-          <% if logged_in? %>
-            <button class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-              <%= link_to "Create your own blog", new_blog_path  %>
-            </button>
-          <%end%>
-      </div>
-
-      <!-- blog container -->
-      <div class="grid grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 sm:pt-16 lg:grid-cols-3">
-        <% @blogs.each do |blog| %>
-        <article class="flex flex-col items-start justify-between">
-            <!-- image -->
-            <div class="mb-4">
-                <%= image_tag blog.image, class: "rounded-lg w-full" %>
-            </div>
-
-          <div class="text-sm">
-            <time datetime="2020-03-16" class="text-gray-500"> <%= blog.created_at.strftime("%B %d, %Y") %></time> 
-          </div>
-
-          <!-- title and description -->
-          <div class="group relative">
-            <h3 class="text-lg font-semibold text-gray-950 group-hover:text-gray-600 mb-2">
-              <%= link_to blog.title, blog_path(blog) %>
-            </h3>
-            <p class="text-sm text-gray-600">
-              <%= link_to truncate(blog.description, length: 80, separator: ' '), blog_path(blog) %>
-            </p>
-          </div>
-
-          <!-- user -->
-          <%= link_to user_path(blog.user), class: "relative mt-8 flex items-center gap-x-4"  do %>
-            <div class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white text-lg font-semibold shadow">
-              <%= blog.user.avatar_letter %>
-            </div>
-            
-            <div class="text-sm">
-              <p class="font-semibold text-gray-900">
-                 <%= blog.user.username %>
-              </p>
-              <p class="text-gray-600">
-                <%= blog.user.usertitle %>
-              </p>
-            </div>
-          <% end %>
-
-
-        </article>
-        <% end %>
-      </div>
-
-
-    <!-- pagination -->
-    <div class="flickr_pagination pt-20">
-      <%= will_paginate @blogs, :container => false %>
+<section class="py-16 sm:py-24">
+  <!-- top heading -->
+  <div class="flex justify-between items-start">
+    <div>
+      <h2
+        class="text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl"
+      >
+        From the blog
+      </h2>
+      <p class="mt-2 text-lg/8 text-gray-600">
+        Insights and advice to help you grow in every area of life.
+      </p>
     </div>
 
-  </section>
-  
+    <% if logged_in? %>
+    <button
+      class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900"
+    >
+      <%= link_to "Create your own blog", new_blog_path %>
+    </button>
+    <%end%>
+  </div>
 
+  <!-- blog container -->
+  <div
+    class="grid grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 sm:pt-16 lg:grid-cols-3"
+  >
+    <% @blogs.each do |blog| %>
+    <article class="flex flex-col items-start justify-between">
+      <!-- image -->
+      <div class="mb-4">
+        <%= link_to blog_path(blog) do %> <%= image_tag blog.image, class:
+        "rounded-lg w-full" %> <% end %>
+      </div>
 
+      <div class="text-sm">
+        <time datetime="2020-03-16" class="text-gray-500">
+          <%= blog.created_at.strftime("%B %d, %Y") %>
+        </time>
+      </div>
 
+      <!-- title and description -->
+      <div class="group relative">
+        <h3
+          class="text-lg font-semibold text-gray-950 group-hover:text-gray-600 mb-2"
+        >
+          <%= link_to blog.title, blog_path(blog) %>
+        </h3>
+        <p class="text-sm text-gray-600">
+          <%= link_to truncate(blog.description, length: 80, separator: ' '),
+          blog_path(blog) %>
+        </p>
+      </div>
 
+      <!-- user -->
+      <%= link_to user_path(blog.user), class: "relative mt-8 flex items-center
+      gap-x-4" do %>
+      <div
+        class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-600 text-white text-lg font-semibold shadow"
+      >
+        <%= blog.user.avatar_letter %>
+      </div>
+
+      <div class="text-sm">
+        <p class="font-semibold text-gray-900"><%= blog.user.username %></p>
+        <p class="text-gray-600"><%= blog.user.usertitle %></p>
+      </div>
+      <% end %>
+    </article>
+    <% end %>
+  </div>
+
+  <!-- pagination -->
+  <div class="flickr_pagination pt-20">
+    <%= will_paginate @blogs, :container => false %>
+  </div>
+</section>

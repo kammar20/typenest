@@ -1,28 +1,3 @@
-// document.addEventListener("turbolinks:load", function () {
-//     const hamburgerBtn = document.querySelector("#hamburger");
-//     const navMenu = document.querySelector('#navbar-menu');
-
-
-//     const dropdownBtn = document.querySelector("#dropdownNavbarLink");
-//     const dropdownMenu = document.querySelector("#dropdownNavbar");
-
-    
-
-//     // if (hamburgerBtn) {
-//       hamburgerBtn.addEventListener("click", function () {
-//         navMenu.classList.toggle("hidden")
-//       });
-//     // }
-
-
-//     // dropdown
-//     dropdownBtn.addEventListener("click",function(){
-//         dropdownMenu.classList.toggle("hidden")
-//     }) 
-//   });
-  
-
-
 document.addEventListener("turbolinks:load", function () {
     const hamburgerBtn = document.querySelector("#hamburger");
     const navMenu = document.querySelector('#navbar-menu');

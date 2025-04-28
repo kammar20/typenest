@@ -7,7 +7,7 @@
         <p class="text-lg text-gray-600 w-[40%]">A diverse community of writers sharing unique stories, helpful tips, and inspiring ideas — all in one place.</p>
       </div>
 
-      <div class="flex justify-between flex-wrap gap-10">
+      <div class="flex justify-start flex-wrap gap-10">
         <% @users.each do |user| %>
           <%= link_to user_path(user), class: "w-full sm:w-[48%] lg:w-[30%] transform transition duration-300 hover:scale-105" do %>
             <div class="flex items-center gap-4 bg-white shadow-md p-4 rounded-lg cursor-pointer">

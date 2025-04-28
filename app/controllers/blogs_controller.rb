@@ -25,7 +25,7 @@ class BlogsController < ApplicationController
   end
 
   def show
-
+    @likes = @blog.likes
   end
   
   def edit
